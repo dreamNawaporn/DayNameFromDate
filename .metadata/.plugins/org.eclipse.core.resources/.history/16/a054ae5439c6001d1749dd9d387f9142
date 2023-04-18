@@ -1,0 +1,45 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+class TestDate {
+
+    public static void main(String[] args) {
+        // Set ChromeDriver path
+        System.setProperty("webdriver.chrome.driver", "D:\\webdriver\\chromedriver2.exe");
+
+        // Initialize ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to page
+        driver.get("http://localhost/Get%20Day%20Name%20From%20Date%20%20(Show%20Error)/");
+
+        // Find day element and select option
+        Select daySelect = new Select(driver.findElement(By.id("day")));
+        daySelect.selectByValue("15");
+
+        // Find month element and select option
+        Select monthSelect = new Select(driver.findElement(By.id("month")));
+        monthSelect.selectByVisibleText("พฤษภาคม");
+
+        // Find year element and input value
+        WebElement yearInput = driver.findElement(By.id("year"));
+        yearInput.sendKeys("2565");
+
+        // Submit form
+        WebElement submitButton = driver.findElement(By.xpath("//input[@type='submit']"));
+        submitButton.click();
+
+        // Get and print result
+        WebElement resultElement = driver.findElement(By.tagName("body"));
+        String result = resultElement.getText();
+        System.out.println(result);
+
+        // Quit driver
+        driver.quit();
+    }
+}
